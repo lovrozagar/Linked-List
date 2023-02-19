@@ -50,6 +50,35 @@ class LinkedList {
     current.next = null;
   }
 
+  contains(value) {
+    let current = this.head;
+    let isMatch = false;
+
+    while (current) {
+      if (current.data === value) {
+        isMatch = true;
+      }
+      current = current.next;
+    }
+
+    return isMatch;
+  }
+
+  find(value) {
+    let current = this.head;
+    let index = -1;
+
+    while (current) {
+      index += 1;
+      if (current.data === value) {
+        return index;
+      }
+      current = current.next;
+    }
+
+    return null;
+  }
+
   getSize() {
     return this.size;
   }
@@ -68,6 +97,21 @@ class LinkedList {
     return current;
   }
 
+  getNodeAtIndex(index) {
+    let current = this.head;
+    let counter = 0;
+
+    while (current) {
+      if (counter === index) {
+        return current;
+      }
+      counter += 1;
+      current = current.next;
+    }
+
+    return `Node of index ${index} does not exist`;
+  }
+
   printListValues() {
     let current = this.head;
 
@@ -76,9 +120,31 @@ class LinkedList {
       current = current.next;
     }
   }
+
+  getListAsString() {
+    let current = this.head;
+    let string = '';
+
+    while (current) {
+      if (current === this.head) {
+        string = string.concat(`(${current.data})`);
+      } else {
+        string = string.concat(` -> (${current.data})`);
+      }
+      current = current.next;
+    }
+
+    string === '' ? (string = 'null') : (string = string.concat(' -> null'));
+    return string;
+  }
 }
 
 const ll = new LinkedList();
-ll.prepend(100);
-ll.pop();
+ll.append(100);
+ll.append(200);
+ll.append(300);
+ll.append(500);
+ll.append(400);
+ll.append(700);
 ll.printListValues();
+console.log(ll.getNodeAtIndex(0));
